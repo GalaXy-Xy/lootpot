@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useContract, useProvider, useSigner } from 'wagmi';
 import { PoolFactory__factory, PrizePool__factory } from '@/contracts/types';
-import { ethers } from 'ethers';
+import { parseEther } from 'ethers/lib/utils';
 
 interface Pool {
   address: string;
@@ -118,7 +118,7 @@ export function usePrizePools(factoryAddress?: string): UsePrizePoolsReturn {
         poolData.winProbability,
         poolData.platformFeePercent,
         poolData.durationInDays,
-        { value: ethers.utils.parseEther('0.01') } // Creation fee
+        { value: parseEther('0.01') } // Creation fee
       );
 
       await tx.wait();
